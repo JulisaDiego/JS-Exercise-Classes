@@ -102,21 +102,23 @@ class Car {
   }
 
   drive(distance) {
-    this.odometer += distance;
-    if (this.tank > 0) {
-      this.tank - (distance / this.milesPerGallon);
+    const gallons = distance / this.milesPerGallon
+    const fuel = this.tank * this.milesPerGallon
+  
+    if (fuel < distance) {
+      this.odometer += fuel
+      this.tank = 0
+      
+      return `I ran out of fuel at ${this.odometer} miles!`
     }
   
     else {
-      return `I ran out of fuel ${this.odometer} miles!`
+      this.odometer += distance 
+      this.tank -= gallons
     }
   }
-  }
-
-  const batmobile = new Car('BatMobile', 20)
-
-  
-  
+}
+    
  
 
 /*
@@ -175,15 +177,26 @@ class Instructor extends Lambdasian {
   this.catchPhrase = attributes.catchPhrase;
 }
 
-demo(){
+demo(subject){
   return `Today we are learning about ${subject}`
 }
 
-grade() {
-  return `${student.name} receives a perfect score on ${subject}`
+grade(subject) {
+  return `${this.name} receives a perfect score on ${subject}`
 }
 }
 
+const maggie = new Instructor ({
+  name: 'Maggie',
+  age: 3,
+  location: 'Florida',
+  specialty: 'Cuddling',
+  favLanguage: 'Ferretnese',
+  catchPhrase: 'Don\'t forget the homies'
+})
+
+maggie.demo("Javascript")
+maggie.grade("Javascript");
 
 /*
   TASK 5
@@ -201,12 +214,42 @@ grade() {
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
 class Student extends Lambdasian {
-constructor(attributes) {
-  super(attributes);
-  this.previousBackground = attributes.previousBackground;
-  this.
-}
-}
+  constructor(attributes) {
+    super(attributes);
+    this.previousBackground = attributes.previousBackground;
+    this.className = attributes.className;
+    this.favSubjects = attributes.favSubjects;
+  }
+  
+  listSubjects() {
+    return `I am loving ${this.favSubjects}`  ;
+  }
+  
+  PRAssignment(){
+    return `${this.name} has submitted a PR for ${this.favSubjects}`
+  }
+
+  sprintChallenge(subject) {
+    return `${this.name} has begun sprint challenge on ${subject}`
+  }
+  }
+  
+  const jack = new Student ({
+    name: 'Jack',
+    age: 4,
+    location: 'Florida',
+    previousBackground: 'Retail',
+    className: 'WebEU 3',
+    favSubjects: ['JS', 'Node', 'Redux']
+  })
+    
+  jack.listSubjects();
+  jack.PRAssignment("Javascript");
+  jack.sprintChallenge("Node");
+  
+  
+
+
 
 /*
   TASK 6
@@ -221,10 +264,35 @@ constructor(attributes) {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
-}
-
+class ProjectManager extends Instructor {
+  constructor(attributes) {
+    super(attributes);
+    this.gradClassName = attributes.gradClassName;
+    this.favInstructor = attributes.favInstructor;
+  }
+  
+  standUp(channel){
+  return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+  
+  debugsCode(subject){
+  return `${this.name} debugs ${jack.name}'s code on ${subject}`;
+  }
+  }
+  
+  const oliver = new ProjectManager ({
+    name: 'Oliver',
+    age: 10,
+    location: 'San Francisco',
+    specialty: 'Node',
+    favLanguage: 'JavaScript',
+    catchPhrase: 'Keep doing what you\'re doing!',
+    gradClassName: 'Web25',
+    favInstructor: 'Maggie'
+  })
+  
+  oliver.standUp("Slack channel");
+  oliver.debugsCode("Javascript");
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
