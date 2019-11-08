@@ -21,6 +21,10 @@ class Airplane {
   }
 }
 
+const myPlane = new Airplane('Jumbo');
+
+myPlane.takeOff();
+myPlane.isFlying;
 /*
 // 👇 COMPLETE YOUR WORK BELOW 👇
 // 👇 COMPLETE YOUR WORK BELOW 👇
@@ -41,8 +45,34 @@ class Airplane {
 */
 
 class Person {
+constructor(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+}
+  eat(someFood) {
+    if (this.stomach.length < 10){
+      this.stomach.push(someFood);
+    }
+  }
+
+  poop() {
+    if (this.stomach = [10]) {
+      this.stomach = []
+    };
+  }
+
+  toString() {
+    return `${this.name}, ${this.age}`
+  }
 
 }
+
+const neo = new Person('Neo', 20);
+neo.toString();
+ 
+
+
 
 /*
   TASK 2
@@ -59,8 +89,35 @@ class Person {
 */
 
 class Car {
+  constructor(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
+  
+  } 
+  
+  fill(gallons) {
+    this.tank += gallons;
+  }
 
-}
+  drive(distance) {
+    this.odometer += distance;
+    if (this.tank > 0) {
+      this.tank - (distance / this.milesPerGallon);
+    }
+  
+    else {
+      return `I ran out of fuel ${this.odometer} miles!`
+    }
+  }
+  }
+
+  const batmobile = new Car('BatMobile', 20)
+
+  
+  
+ 
 
 /*
   TASK 3
@@ -75,8 +132,26 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-
+  constructor(attributes) {
+  this.name = attributes.name;
+  this.age = attributes.age;
+  this.location = attributes.location;
+  };
+  
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
+  
 }
+
+const winston = new Lambdasian({
+ name: "Winston",
+ age: 2,
+ location: "Florida"
+});
+
+winston.speak();
+
 
 /*
   TASK 4
@@ -92,8 +167,34 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian {
+  constructor(attributes) {
+  super(attributes);
+  this.specialty = attributes.specialty;
+  this.favLanguage = attributes.favLanguage;
+  this.catchPhrase = attributes.catchPhrase;
+}
 
+
+
+}
+
+const instructorAttr = {
+  name: 'Luis',
+  age: 45,
+  location: 'Provo',
+  specialty: 'SQL',
+  favLanguage: 'C#',
+  catchPhrase: 'Don\'t forget the homies'
+}
+
+const studentAttr = {
+  name: 'Matt',
+  age: 30,
+  location: 'London',
+  previousBackground: 'Plumber',
+  className: 'WebEU 3',
+  favSubjects: ['JS', 'Node', 'Redux']
 }
 
 /*
